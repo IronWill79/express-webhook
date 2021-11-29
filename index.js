@@ -7,7 +7,7 @@ const PORT = process.env.WEBHOOK_PORT;
 
 app.use(bodyParser.json());
 
-app.post(`/hook/${process.env.WEBHOOK_HASH}`, (req, res) => {
+app.post(`/hook/${process.env.WEBHOOK_PATH}`, (req, res) => {
   res.status(200).send({ message: 'OK', recievedMessage: req.body });
 });
 
