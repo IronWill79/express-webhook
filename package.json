@@ -1,0 +1,17 @@
+{
+  "name": "express-webhook",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/IronWill79/express-webhook.git",
+  "author": "Will Walsh <1820392+IronWill79@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  }
+}
