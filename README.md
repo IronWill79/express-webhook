@@ -18,11 +18,13 @@ Boilerplate that accepts a POST request at `/hook/{.env/WEBHOOK_PATH}` and parro
 1. Clone the repo
 1. Run `yarn` to install node modules
 1. Copy `.env.example` to `.env` and set variables
+1. Set `TESTING` to `false` to execute script
+1. Ensure shell script has execute permissions
 
 ## Local Execution
 
 1. `yarn start`
-1. Browse to `localhost:PORT`
+1. Browse to `localhost:PORT/hook/WEBHOOK_PATH`
 
 ## Deployment
 
