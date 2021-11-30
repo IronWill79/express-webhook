@@ -8,19 +8,20 @@ const PORT = process.env.WEBHOOK_PORT;
 
 app.use(bodyParser.json());
 
-app.post(`/hook/${process.env.WEBHOOK_PATH}`, (req, res) => {
-  exec('ls -la', (error, stdout, stderr) => {
+app.post(`/hook/:path`, (req, res) => {
+  console.log(req.params.path);
+  if (req.params.path !== process.env.WEBHOOK_PATH) {
+    return;
+  }
+  exec(process.env.SHELL_SCRIPT, (error, stdout, stderr) => {
     if (error) {
-      console.log(`error: ${error.message}`);
-      res.status(500).send(error.message);
+      res.status(500).send(JSON.stringify(error));
       return;
     }
     if (stderr) {
-      console.log(`stderr: ${stderr}`);
-      res.status(500).send(stderr);
+      res.status(500).send(JSON.stringify(stderr));
       return;
     }
-    console.log(`stdout: ${stdout}`);
     res
       .status(200)
       .send({ message: 'OK', recievedMessage: req.body, response: stdout });
