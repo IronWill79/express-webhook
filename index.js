@@ -13,23 +13,27 @@ app.post(`/hook/:path`, (req, res) => {
   if (req.params.path !== process.env.WEBHOOK_PATH) {
     return;
   }
-  if (process.env.TESTING !== false && !rebuilding) {
-    rebuilding = true;
-    exec(process.env.SHELL_SCRIPT, (error, stdout, stderr) => {
-      if (error) {
-        console.error(JSON.stringify(error));
-        return;
-      }
-      if (stderr) {
-        console.error(JSON.stringify(stderr));
-        return;
-      }
-      console.log(JSON.stringify(stdout));
-      rebuilding = false;
-    });
-    res.status(200).send({ message: 'Rebuild started' });
+  if (process.env.TESTING !== false) {
+    if (!rebuilding) {
+      rebuilding = true;
+      exec(process.env.SHELL_SCRIPT, (error, stdout, stderr) => {
+        if (error) {
+          console.error(JSON.stringify(error));
+          return;
+        }
+        if (stderr) {
+          console.error(JSON.stringify(stderr));
+          return;
+        }
+        console.log(JSON.stringify(stdout));
+        rebuilding = false;
+      });
+      res.status(200).send({ message: 'Rebuild started' });
+    } else {
+      res.status(200).send({ message: 'Rebuilding' });
+    }
   } else {
-    res.status(200).send({ message: 'Rebuilding' });
+    res.status(200).send({ message: 'Testing' });
   }
 });
 
