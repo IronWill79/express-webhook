@@ -75,5 +75,8 @@ typings/
 # FuseBox cache
 .fusebox/
 
+# OS files
+.DS_Store
+
 # custom ignores
 *.sh
